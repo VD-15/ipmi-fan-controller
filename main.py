@@ -90,17 +90,17 @@ while True:
 
             # Fan curve is (2x - 60)% this was suitable for my purposes.
             # Others may wish to modify depending on desired temperature range, but take care when doing so.
-            fan_speed = (2 * m - 60)
+            fan_speed = (2 * m) - 60
 
             # IMPORTANT: clamp fan curve between 20% and 100%
-            # Ensures a sensible minum and maximum fan speed
+            # Ensures a sensible minimum and maximum fan speed
             clamp_speed = int(max(20, min(100, m)))
 
             # Convert fan speed to hex to pass to ipmitool.
-            fan_hex = hex(int(fan_speed))
+            fan_hex = hex(clamp_speed)
 
             # Print new fan speed and temperature to stdout.
-            print('Temperature: ' + str(m) + ', fan speed: ' + str(fan_speed), ' (' + fan_hex + ')', flush=True)
+            print('Temperature: ' + str(m) + ', fan speed: ' + str(clamp_speed), ' (' + fan_hex + ')', flush=True)
 
             # Set fan speed of each zone.
             for zone in IPMITOOL_ZONES:
